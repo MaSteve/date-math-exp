@@ -1,0 +1,11 @@
+/node_modules
+/coverage
+/build
+/*.iml
+/tmp
+*~
+*#
+*.swp
+*.bak
+.DS_Store
+.idea

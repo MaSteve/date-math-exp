@@ -1,0 +1,17 @@
+{
+  "name": "petsapp-task",
+  "version": "1.0.0",
+  "description": "petsapp-task",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "reformat": "find ./src ./test -type f -name \\*.[tj]sx -o -name \\*.[tj]s | xargs prettier --write"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.3",
+    "jest": "^29.6.2",
+    "prettier": "^3.0.2",
+    "ts-jest": "^29.1.1",
+    "typescript": "^5.1.6"
+  }
+}
