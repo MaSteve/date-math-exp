@@ -1,4 +1,5 @@
-import { Token, TokenType, tokenize } from '../src/tokenizer';
+import { TokenType, tokenize } from '../src/tokenizer';
+import { getToken } from './helper';
 
 describe('tokenize', () => {
   it.each([
@@ -66,17 +67,3 @@ describe('tokenize', () => {
     ]);
   });
 });
-
-function getToken(
-  position: number,
-  tokenType: TokenType,
-  value?: string
-): Token {
-  let val = value ?? (tokenType == TokenType.EndOfExpression ? '' : tokenType);
-  return {
-    value: val,
-    startPosition: position,
-    endPosition: position + val.length,
-    tokenType,
-  };
-}

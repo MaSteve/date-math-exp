@@ -2,7 +2,7 @@ export enum TokenType {
   Now = 'now',
   Plus = '+',
   Minus = '-',
-  Numeral = 'numeral',
+  Numeral = 'Numeral',
   Slash = '/',
   Year = 'y',
   Month = 'M',
@@ -11,7 +11,27 @@ export enum TokenType {
   Hour = 'h',
   Minute = 'm',
   Second = 's',
-  EndOfExpression = 'end of expression',
+  EndOfExpression = 'End of expression',
+}
+
+export const UNITS_OF_TIME = [
+  TokenType.Year,
+  TokenType.Month,
+  TokenType.Week,
+  TokenType.Day,
+  TokenType.Hour,
+  TokenType.Minute,
+  TokenType.Second,
+];
+
+export function isUnitOfTime(tokenType: TokenType) {
+  return UNITS_OF_TIME.includes(tokenType);
+}
+
+export const OPERATORS = [TokenType.Plus, TokenType.Minus];
+
+export function isOperator(tokenType: TokenType) {
+  return OPERATORS.includes(tokenType);
 }
 
 export interface Token {
