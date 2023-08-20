@@ -1,5 +1,5 @@
 import { Token, TokenType } from '../tokenizer';
-import { ExpressionNode } from './date-math';
+import { EvaluationError, ExpressionNode } from './date-math';
 
 export class OperandNode extends ExpressionNode {
   private operator: Token;
@@ -20,8 +20,9 @@ export class OperandNode extends ExpressionNode {
     } else if (this.operator.tokenType === TokenType.Minus) {
       return value - delta;
     } else {
-      // TODO: throw error
-      throw 'Unsupported operator';
+      throw new EvaluationError(
+        `Unsupported operator ${this.operator.tokenType} in position ${this.operator.startPosition}`
+      );
     }
   }
 
@@ -30,30 +31,36 @@ export class OperandNode extends ExpressionNode {
       return null;
     }
 
+    let result = new Date(date);
+
     switch (this.timeUnit.tokenType) {
       case TokenType.Year:
-        date.setUTCFullYear(this.applyOperation(date.getUTCFullYear()));
+        result.setUTCFullYear(this.applyOperation(result.getUTCFullYear()));
         break;
       case TokenType.Month:
-        date.setUTCMonth(this.applyOperation(date.getUTCMonth()));
+        result.setUTCMonth(this.applyOperation(result.getUTCMonth()));
         break;
       case TokenType.Week:
-        date.setUTCDate(this.applyOperation(date.getUTCDate(), 7));
+        result.setUTCDate(this.applyOperation(result.getUTCDate(), 7));
         break;
       case TokenType.Day:
-        date.setUTCDate(this.applyOperation(date.getUTCDate()));
+        result.setUTCDate(this.applyOperation(result.getUTCDate()));
         break;
       case TokenType.Hour:
-        date.setUTCHours(this.applyOperation(date.getUTCHours()));
+        result.setUTCHours(this.applyOperation(result.getUTCHours()));
         break;
       case TokenType.Minute:
-        date.setUTCMinutes(this.applyOperation(date.getUTCMinutes()));
+        result.setUTCMinutes(this.applyOperation(result.getUTCMinutes()));
         break;
       case TokenType.Second:
-        date.setUTCSeconds(this.applyOperation(date.getUTCSeconds()));
+        result.setUTCSeconds(this.applyOperation(result.getUTCSeconds()));
         break;
+      default:
+        throw new EvaluationError(
+          `Unsupported unit of time ${this.operator.tokenType} in position ${this.operator.startPosition}`
+        );
     }
 
-    return date;
+    return result;
   }
 }
