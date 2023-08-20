@@ -12,7 +12,9 @@ UnitOfTime -> y | M | w | d | h | m | s
 Timestamp -> now
 ```
 
-The second function relies on a simple implementation that computes the deltas between the different fields in the given date and the current date, and use that to generate a date math expression. Some particular approach is used for dealing with the months as they don't have always the same number of days (30, 31, 28 or 29) so first we go to the first day of the month, compute the delta for the month and lastly jump to the day in the given date. There could be better approaches but this is valid.
+The second function relies on a simple implementation that computes the deltas between the different fields in the given date and the current date, and use that to generate a date math expression. Some particular approach is used for dealing with the months as they don't have always the same number of days (30, 31, 28 or 29) so first we go to the first day of the month, compute the delta for the year and the month and lastly jump to the day in the given date. There could be better approaches but this is valid.
+
+This trick is not needed for leap seconds because typescript considers that there are exactly 86,400,000 milliseconds per day.
 
 ## How can I use it?
 - Unzip the file into a folder and open it in a console

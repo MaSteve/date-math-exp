@@ -44,16 +44,16 @@ export function stringify(date: Date, dateOverride?: Date): DateString {
   let now = dateOverride ?? new Date();
   let res = 'now';
 
-  res += getDiffExpression(now, date, TokenType.Year);
-
   // Months have a variable number of days and subtracting or adding months to
   // a date can be a bit unpredictable. Instead this function goes to the 1st day
-  // of the month, move to the correct month and then jump to the expected day.
+  // of the month, move to the correct year and month and then jump to the expected day.
   // It might result in a longer expression but that's still valid.
   let dayFromNow = now.getUTCDate();
   if (dayFromNow > 1) {
     res += `-${dayFromNow - 1}d`;
   }
+
+  res += getDiffExpression(now, date, TokenType.Year);
 
   res += getDiffExpression(now, date, TokenType.Month);
 
