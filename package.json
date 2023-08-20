@@ -2,8 +2,9 @@
   "name": "petsapp-task",
   "version": "1.0.0",
   "description": "petsapp-task",
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {
+    "build": "tsc",
     "test": "jest",
     "reformat": "find ./src ./test -type f -name \\*.[tj]sx -o -name \\*.[tj]s | xargs prettier --write"
   },
