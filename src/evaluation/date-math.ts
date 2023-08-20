@@ -1,8 +1,18 @@
-export abstract class ExpressionNode {}
+export abstract class ExpressionNode {
+  abstract apply(date: Date | null): Date | null;
+}
 
 export class DateMathExpression {
-  private nodes: ExpressionNode;
-  constructor(nodes: ExpressionNode) {
+  private nodes: ExpressionNode[];
+  constructor(nodes: ExpressionNode[]) {
     this.nodes = nodes;
+  }
+
+  public evaluate(dateOverride?: Date): Date | null {
+    let date = dateOverride ?? null;
+    for (let idx = 0; idx < this.nodes.length; idx++) {
+      date = this.nodes[idx].apply(date);
+    }
+    return date;
   }
 }
