@@ -1,7 +1,7 @@
 {
-  "name": "petsapp-task",
+  "name": "date-math-exp",
   "version": "1.0.0",
-  "description": "petsapp-task",
+  "description": "date-math-exp",
   "main": "index.ts",
   "scripts": {
     "build": "tsc",
